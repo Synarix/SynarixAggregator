@@ -9,8 +9,7 @@ You can install the package using pip:
 pip install RixDexAggregator
 ```
 
-# Docs
-  [Documentation](docs/index.md)
+##  [Documentation](docs/index.md)
 
 ### `LICENSE`
 ```plaintext

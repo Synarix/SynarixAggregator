@@ -46,19 +46,19 @@ print(price)
 
 ## Structure
 
-- **[SynarixAggregator Interface](synarix_aggregator_interface.md)**: 
-  Detailed information about the `SynarixAggregatorInterface` class, including its methods and attributes.
+- **[SynarixAggregatorModule (SAM)](Synarix_Aggregator_Module.md)**: 
+  Detailed information about the `SynarixAggregatorModule` class, including its methods and attributes.
 
-- **[Settings Methods](settings_methods.md)**: 
+- **[CoreSettings (settings) Methods](settings_methods.md)**: 
   Overview of the `CoreSettings` class, including configuration management and validation.
 
-- **[Aggregator Methods](aggregator_functions.md)**: 
-  Comprehensive details on the methods provided by the `SynarixAggregatorContractFunctions` class.
+- **[InterfaceAggregatorContract (IAC) Methods](aggregator_functions.md)**: 
+  Comprehensive details on the methods provided by the `InterfaceAggregatorContract` class.
 
-- **[ERC20 Interface Methods](ierc20_functions.md)**: 
+- **[Interface ERC20 (IERC20) Methods](ierc20_functions.md)**: 
   Comprehensive details on the methods provided by the `IERC20` class.
 
-- **[Web3 Utils Methods](ierc20_functions.md)**: 
+- **[w3Utils (w3Utils )Methods](w3Utils_functions.md)**: 
   Comprehensive details on the methods provided by the `W3Utils` class.
 
 
