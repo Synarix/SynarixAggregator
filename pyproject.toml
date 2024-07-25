@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "pysynarixaggregator"
+version = "0.0.1"
+description = "pySynarixAggregator provide Simple use of Blockchain data."
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+mkdocs = "^1.4.2"
+mkdocs-material = "^9.1.4"
+mkdocstrings = "^0.20.0"
+mkdocstrings-python = "^0.1.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,12 @@
+site_name: pySynarixAggregator
+
+theme:
+  name: "readthedocs"
+
+plugins:
+  - mkdocstrings
+
+nav:
+  - Get Started: index.md
+  - IAC Functions: aggregator_functions.md
+  - IERC20 Functions: ierc20_functions.md
