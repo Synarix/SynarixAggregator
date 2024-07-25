@@ -17,7 +17,10 @@ The Synarix Aggregator project offers tools and classes for seamless integration
 
 ###  Installation
 ```bash
-pip install SynarixAggregator
+git clone https://github.com/Synarix/SynarixAggregator
+cd SynarixAggregator
+python setup.py install
+
 ```
 
 ##### Import, initalize and test

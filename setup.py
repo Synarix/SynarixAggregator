@@ -8,7 +8,7 @@ setup(
     long_description_content_type='text/markdown',
     url='https://github.com/Synarix/SynarixAggregator',
     author='Synarix Labs',
-    author_email='later@example.com',
+    author_email='Synarix@protonmail.com"', 
     license='MIT',
     packages=find_packages(),
     install_requires=[

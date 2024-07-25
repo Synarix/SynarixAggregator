@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "pysynarixaggregator"
+name = "synarixaggregator"
 version = "0.0.1"
-description = "pySynarixAggregator provide Simple use of Blockchain data."
-authors = ["Your Name <you@example.com>"]
+description = "SynarixAggregator provide Simple use of Blockchain data."
+authors = ["Synarix@protonmail.com"]
 license = "MIT"
 readme = "README.md"
 

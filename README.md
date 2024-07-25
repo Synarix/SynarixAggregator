@@ -6,9 +6,10 @@ RixDexAggregator is a Python library for aggregating token prices across multipl
 You can install the package using pip:
 
 ```bash
-pip install RixDexAggregator
+git clone https://github.com/Synarix/SynarixAggregator
+cd SynarixAggregator
+python setup.py install
 ```
-
 ##  [Documentation](docs/index.md)
 
 ### `LICENSE`
