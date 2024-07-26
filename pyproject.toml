@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "synarixaggregator"
-version = "0.0.1"
+version = "0.0.2"
 description = "SynarixAggregator provide Simple use of Blockchain data."
 authors = ["Synarix@protonmail.com"]
 license = "MIT"

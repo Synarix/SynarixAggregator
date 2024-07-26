@@ -9,7 +9,7 @@ import time
 class InterfaceAggregatorContract: #IAC
     
     def __init__(self, settings, w3, IERC20, w3U):
-        self.settings, self.user_address, self.priv_key, self.w3, self.IERC20, self.w3U = settings, settings.settings["metamask_address"], settings.settings["metamask_private_key"], w3, IERC20, w3U
+        self.settings, self.user_address, self.priv_key, self.w3, self.IERC20, self.w3U = settings, settings.settings["address"], settings.settings["private_key"], w3, IERC20, w3U
         self.chain = chains(self.w3.eth.chain_id)
         self.RixSwapAggregator = self.initRouter()
 
@@ -136,9 +136,17 @@ class InterfaceAggregatorContract: #IAC
                 Web3.to_checksum_address(tokenOut)
             ).call()
     
-    def getBNBBalance(self):
+    def getBNBBalance_(self):
         return self.w3.eth.get_balance(self.user_address)
- 
+    
+    def getBNBBalance(self):
+        return self.w3.from_wei(self.w3.eth.get_balance(self.user_address), "ether")
+    
+    def getBNBBalanceOf_(self, address):
+        return self.w3.eth.get_balance(address)
+    
+    def getBNBBalanceOf(self, address):
+        return self.w3.from_wei(self.w3.eth.get_balance(address), "ether")
 
     def TestSwapETHtoToken(self, inputAmount: float):
         try:
@@ -218,11 +226,11 @@ class InterfaceAggregatorContract: #IAC
                 elif int(v) == 3:
                     return self.SwapFromETHtoTokenV3(inputBNB)
             except Exception as e:
-                #print(e)
+                print(e)
                 trys -= 1
                 time.sleep(1)
                 if trys == 0:
-                    return False, "0"
+                    return False, "0", e
 
     def SwapFromETHtoTokenV2(self, inputAmount: int):
         path, dexIdents  = self.getETHtoTokenPathV2()
@@ -248,9 +256,9 @@ class InterfaceAggregatorContract: #IAC
         txn_receipt = self.w3.eth.wait_for_transaction_receipt(
             txn, timeout=self.settings.settings["timeout"])
         if txn_receipt["status"] == 1:
-            return True, txn.hex(), gas[1]
+            return True, txn.hex(), gas
         else:
-            return False, txn.hex(), gas[1]
+            return False, txn.hex(), gas
                 
 
 
@@ -280,9 +288,9 @@ class InterfaceAggregatorContract: #IAC
         txn_receipt = self.w3.eth.wait_for_transaction_receipt(
             txn, timeout=self.settings.settings["timeout"])
         if txn_receipt["status"] == 1:
-            return True, txn.hex(), gas[1]
+            return True, txn.hex(), gas
         else:
-            return False, txn.hex(), gas[1]
+            return False, txn.hex(), gas
 
 
 
@@ -301,7 +309,7 @@ class InterfaceAggregatorContract: #IAC
                 trys -= 1
                 time.sleep(1)
                 if trys == 0:
-                    return False, "0"
+                    return False, "0", e
         
 
 
@@ -331,9 +339,9 @@ class InterfaceAggregatorContract: #IAC
         txn_receipt = self.w3.eth.wait_for_transaction_receipt(
             txn, timeout=self.settings.settings["timeout"])
         if txn_receipt["status"] == 1:
-            return True, txn.hex(), gas[1]
+            return True, txn.hex(), gas
         else:
-            return False, txn.hex(), gas[1]
+            return False, txn.hex(), gas
 
 
 
@@ -363,9 +371,9 @@ class InterfaceAggregatorContract: #IAC
         txn_receipt = self.w3.eth.wait_for_transaction_receipt(
             txn, timeout=self.settings.settings["timeout"])
         if txn_receipt["status"] == 1:
-            return True, txn.hex(), gas[1]
+            return True, txn.hex(), gas
         else:
-            return False, txn.hex(), gas[1]
+            return False, txn.hex(), gas
 
     
 
@@ -395,9 +403,9 @@ class InterfaceAggregatorContract: #IAC
         txn_receipt = self.w3.eth.wait_for_transaction_receipt(
             txn, timeout=self.settings.settings["timeout"])
         if txn_receipt["status"] == 1:
-            return True, txn.hex(), gas[1]
+            return True, txn.hex(), gas
         else:
-            return False, txn.hex(), gas[1]
+            return False, txn.hex(), gas
 
 
     def SwapFromTokentoTokenV2(self, tokenIn, tokenOut, inputAmount: int, trys: int = 1):
@@ -425,6 +433,6 @@ class InterfaceAggregatorContract: #IAC
         txn_receipt = self.w3.eth.wait_for_transaction_receipt(
             txn, timeout=self.settings.settings["timeout"])
         if txn_receipt["status"] == 1:
-            return True, txn.hex(), gas[1]
+            return True, txn.hex(), gas
         else:
-            return False, txn.hex(), gas[1]
+            return False, txn.hex(), gas

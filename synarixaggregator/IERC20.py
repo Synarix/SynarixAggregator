@@ -2,10 +2,12 @@ from web3 import Web3
 from web3.middleware import geth_poa_middleware
 from eth_abi import abi
 from .core_abis import IERC20_ABI  # Adjust the import path as necessary
+from .core_chains import chains
 
 class IERC20:
     def __init__(self, settings, w3, token, w3U):
-        self.settings, self.user_address, self.priv_key, self.w3, self.token, self.w3U = settings, settings.settings["metamask_address"], settings.settings["metamask_private_key"], w3, token, w3U
+        self.settings, self.user_address, self.priv_key, self.w3, self.token, self.w3U = settings, settings.settings["address"], settings.settings["private_key"], w3, token, w3U
+        self.chain = chains(self.w3.eth.chain_id)
         self.token_Instance = self.init_token_instance()
         
     def init_token_instance(self):
@@ -13,8 +15,17 @@ class IERC20:
             address=Web3.to_checksum_address(self.token), abi=IERC20_ABI)
         return token_Instance
     
-    def get_token_balance(self, address):
+    def get_token_balanceOf(self, address):
         return self.w3U.from_wei(self.get_token_balance_(address) , self.get_token_decimals())
+    
+    def get_token_balanceOf_(self, address):
+        return self.get_token_balance_(address)
+    
+    def get_token_balance_(self):
+        return self.get_token_balance_(self.user_address)
+    
+    def get_token_balance(self):
+        return self.w3U.from_wei(self.get_token_balance_(self.user_address) , self.get_token_decimals())
     
     def get_token_allowance(self, spender):
         return self.w3U.from_wei(self.get_token_allowance_(spender) , self.get_token_decimals())
@@ -37,6 +48,12 @@ class IERC20:
     def get_token_allowance(self, spender):
         return self.token_Instance.functions.allowance(self.user_address, spender).call()
     
+    def approveAggregator_(self, amount):
+        return self.approve(self.chain.RixSwapAggregator, amountIn=amount)
+    
+    def approveAggregator(self, amount):
+        return self.approve(self.chain.RixSwapAggregator, self.w3U.to_wei(amount, self.get_token_decimals()))
+    
     def is_approved(self, spender, amountIn):
         allowance = self.get_token_allowance(spender)
         if int(allowance) >= int(amountIn):
@@ -44,11 +61,14 @@ class IERC20:
         else:
             return False
         
-    def approve(self, spender, amountIn):
+    def approve(self, spender, amountIn:int=0):
         if self.is_approved(spender, amountIn) == False:
+            approveAmount = 2**256 - 1
+            if amountIn > 0:
+                approveAmount = amountIn
             txn = self.token_Instance.functions.approve(
                 Web3.to_checksum_address(spender),
-                2**256 - 1
+                approveAmount
             ).build_transaction(
                 {'from': self.user_address,
                  'gasPrice': self.w3.eth.gas_price + Web3.to_wei(self.settings.settings["GWEI_OFFSET"], "gwei"),
@@ -65,9 +85,9 @@ class IERC20:
             txn_receipt = self.w3.eth.wait_for_transaction_receipt(
                 txn, timeout=self.settings.settings["timeout"])
             if txn_receipt['status'] == 1:
-                return True, txn.hex(), gas[1]
+                return True, txn.hex(), gas
             else:
-                return False, txn.hex(), gas[1]
+                return False, txn.hex(), gas
         else:
-            return True, "Already Approved", ""
+            return True, "0", "Already Approved"
             
