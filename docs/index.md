@@ -16,11 +16,9 @@ The Synarix Aggregator project offers tools and classes for seamless integration
 - `eth-abi`: For Ethereum ABI encoding/decoding
 
 ###  Installation
+install from pip:
 ```bash
-git clone https://github.com/Synarix/SynarixAggregator
-cd SynarixAggregator
-python setup.py install
-
+pip install SynarixAggregator
 ```
 
 ##### Import, initalize and test

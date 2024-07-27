@@ -3,14 +3,14 @@
 SynarixAggregartor is a Python library for aggregating token prices and evm swaps across multiple decentralized exchanges (DEXs).
 
 ## Installation
-You can install the package using git and python:
+You can install the package using pip:
 
 ```bash
-git clone https://github.com/Synarix/SynarixAggregator
-cd SynarixAggregator
-python setup.py install
+pip install SynarixAggregator
 ```
 ##  [Documentation](docs/index.md)
+##  [Examples](examples/)
+##  [Pypi Realeses](https://pypi.org/manage/project/SynarixAggregator/releases/)
 
 ### `LICENSE`
 ```plaintext
