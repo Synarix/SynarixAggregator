@@ -37,6 +37,18 @@ class InterfaceAggregatorContract: #IAC
         return Web3.from_wei(self.RixSwapAggregator.functions.getUSDPrice(
             self.IERC20.get_token_address()
             ).call(), "ether")
+    
+    
+    def getUSDPriceOf(self, tokenAddress):
+        return Web3.from_wei(self.RixSwapAggregator.functions.getUSDPrice(
+            self.w3.to_checksum_address(tokenAddress)
+            ).call(), "ether")
+    
+    def getUSDPriceOf_(self, tokenAddress):
+        return self.RixSwapAggregator.functions.getUSDPrice(
+            self.w3.to_checksum_address(tokenAddress)
+            ).call()
+    
         
     def getWBNBPrice_(self):
         return self.RixSwapAggregator.functions.getUSDPrice(
