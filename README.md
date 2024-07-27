@@ -8,9 +8,9 @@ You can install the package using pip:
 ```bash
 pip install SynarixAggregator
 ```
-##  [Documentation](docs/index.md)
-##  [Examples](examples/)
-##  [Pypi Realeses](https://pypi.org/manage/project/SynarixAggregator/releases/)
+##  [Documentation](https://github.com/Synarix/SynarixAggregator/tree/main/docs/docs/index.md)
+##  [Examples](https://github.com/Synarix/SynarixAggregator/tree/main/examples)
+##  [Pypi Realese](https://pypi.org/project/SynarixAggregator/#history)
 
 ### `LICENSE`
 ```plaintext
